@@ -1,4 +1,4 @@
-console.log('app web say:', 'hello world')
+console.log('project say:', 'hello world')
 var updateBtns = document.getElementsByClassName('update-cart')
 
 for (let i = 0; i < updateBtns.length; i++) {

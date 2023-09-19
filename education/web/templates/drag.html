@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trò chơi kéo thả</title>
+    <link rel="stylesheet" href="styles.css">
+    <style type=”text/css”>
+      .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border : 10px solid green;
+      } 
+    
+    .pictures, .words {
+        margin: 10px;
+    }
+    
+    .draggable {
+        cursor: grab;
+        user-drag: none;
+        -webkit-user-drag: none;
+        touch-action: none;
+    }
+    </style>
+
+</head>
+<body>
+    <div class="container" id="container">
+        <!-- Thành phần sẽ được thêm vào đây bằng JavaScript -->
+    </div>
+    <div id="score">Điểm: <span id="score-value">0</span></div>
+
+    <script >
+        const container = document.getElementById('container');
+const scoreDisplay = document.getElementById('score-value');
+
+let score = 0;
+
+// Dữ liệu về các button và hình ảnh
+const vocas = [
+    { name: 'Apple', image: { url: 'apple.jpg' } },
+    { name: 'Banana', image: { url: 'banana.jpg' } },
+    // Thêm dữ liệu cho các button và hình ảnh khác ở đây
+];
+
+// Tạo các thành phần cho trò chơi
+vocas.forEach((voca) => {
+    const pictureDiv = document.createElement('div');
+    pictureDiv.classList.add('pictures');
+    pictureDiv.innerHTML = `<img src="${voca.image.url}" class="img-fluid shadow-2-strong" alt="${voca.name}" />`;
+
+    const wordDiv = document.createElement('div');
+    wordDiv.classList.add('words');
+    wordDiv.textContent = voca.name;
+    wordDiv.setAttribute('draggable', true);
+
+    // Xử lý sự kiện kéo và thả
+    wordDiv.addEventListener('dragstart', (e) => {
+        e.dataTransfer.setData('text/plain', voca.name);
+    });
+
+    pictureDiv.appendChild(wordDiv);
+    container.appendChild(pictureDiv);
+});
+
+container.addEventListener('dragover', (e) => {
+    e.preventDefault();
+});
+
+container.addEventListener('drop', (e) => {
+    e.preventDefault();
+    const word = e.dataTransfer.getData('text/plain');
+    const picture = e.target.closest('.pictures');
+
+    if (picture) {
+        const pictureName = picture.querySelector('.words').textContent;
+        if (word === pictureName) {
+            score++;
+            scoreDisplay.textContent = score;
+            picture.querySelector('.words').remove();
+        }
+    }
+});
+    </script>
+</body>
+</html>

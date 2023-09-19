@@ -13,3 +13,21 @@ class Vocabulary(models.Model):
     class Meta:
         verbose_name = 'Từ vựng'
         verbose_name_plural = 'Từ vựng'
+class CambridgeLevel:
+    def __init__(self, level_name, description):
+        self.level_name = level_name
+        self.description = description
+
+    def __str__(self):
+        return f"{self.level_name} - {self.description}"
+
+class Student:
+    def __init__(self, name, age, cambridge_level):
+        self.name = name
+        self.age = age
+        self.cambridge_level = cambridge_level
+
+    def display_info(self):
+        print(f"Tên học sinh: {self.name}")
+        print(f"Tuổi: {self.age}")
+        print(f"Trình độ Cambridge: {self.cambridge_level}")
