@@ -144,7 +144,7 @@
         <p>Some representative placeholder content for the second slide.</p>
       </div>
     </div>
-    <div class="carousel-item">
+    <div class="carousel-item" data-bs-interval="2000>
       <img src="{% static 'app/images/cow-ghee.png' %}" class="d-block w-100" alt="..." height="320">
       <div class="carousel-caption d-none d-md-block bg-success text-white">
         <h5>Third slide label</h5>
@@ -191,12 +191,13 @@
     </script>
 
 
-    <img id="sky" name="sky_3" style="width:50%;height:280px;float:left" src="{{first_voca.image.url}}" alt="not_found">
+    <img id="sky" name="sky_3" style="width:300px;height:280px;float:left" src="{{first_voca.image.url}}" alt="not_found">
     <div >
       <input type="button" id="previousBtn" name="previousBtn" value="previousBtn" style="margin:20px 0 20px;width:100px;height:25px">
       <input type="button" id="nextBtn" name="nextBtn" value="nextBtn" style="margin:20px 0 20px;width:100px;height:25px">
-      <h5 id='textArea_h5'>{{first_voca.name}}</h5>
-      <textarea id="textArea" rows="4" cols="50">{{first_voca.name}}</textarea>
+      <input type="button" id="stopBtn" name="stopBtn" value="stopBtn" style="margin:20px 0 20px;width:100px;height:25px">
+      <h5>Slide word</h5>
+      <textarea id="textAreaSpeak" rows="4" cols="50">{{first_voca.name}}</textarea>
       <P>Trước tiên, tạo mảng chứa tên file ảnh, tên các file ảnh phải được đặt tên theo nguyên tắc : tenmang_index.format để khi chuyển đổi source giữa các ảnh thì chỉ cần thay đổi index mà thôi.</P>
       <P>Tạo tagname img chứa các thuộc tính <cite>id, name, src</cite> trong đó, <strong>src</strong> đã đặt sẵn 1 ảnh thuộc mảng các tên ảnh. Thuộc tính <strong>name</strong> dùng để lưu tên ảnh hiện tại, trong đó phần <cite>index</cite> chứa trong <cite>name</cite> có tác dụng để tạo ra <cite>index</cite> mới, dựa vào tác vụ next|previous để đưa ảnh tiếp theo vào <strong>src</strong></P>
       <P>Tham khảo thêm <a href="https://www.w3schools.com/bootstrap4/bootstrap_carousel.asp">carousel BS4</a> hoặc <a href="https://www.w3schools.com/w3css/w3css_slideshow.asp">W3 css</a></P>
@@ -204,33 +205,8 @@
     <div style="clear:both"></div>
 
     <script>
-      var imgIndex = 0; 
-      //alert('kiểu mảng vocas : '+ typeof vocas + "; length : " + vocas.length);
-      //alert('imgSlide.src : '+vocas[0].image.url);
-      function previousBtn(){
-        var imgSlide = document.getElementById("sky");
-        if (imgIndex>0) {
-          imgIndex -= 1;
-          imgSlide.src = vocas[imgIndex].image.url;
-        } else {
-          imgIndex = vocas.length-1;
-          imgSlide.src = vocas[imgIndex].image.url;
-        }
-      }
-      function nextBtn(){
-        var imgSlide =document.getElementById("sky");
-        imgIndex +=1;
-        if (imgIndex==vocas.length) {
-          imgIndex = 0;
-          imgSlide.src = vocas[0].image.url;
-        } else {
-          imgSlide.src=vocas[imgIndex].image.url;
-        }
-      }
-      document.getElementById("previousBtn").addEventListener("click",function(){previousBtn()});
-      document.getElementById("nextBtn").addEventListener("click",function () {nextBtn()});
 
-      setInterval(nextBtn,2000);
+
     </script>
 
 
@@ -241,11 +217,11 @@
 {% block register %}{% endblock register %}
 {% block search %}{% endblock search %}
 
-<button id="speakButton">Speak</button>
-<textarea id="textArea_del" rows="4" cols="50">Hello, this is a text to speech example.</textarea>
+
 
 <script src="{%static 'web/js/cart.js' %}" rel="script/text"></script>
 <script src="{%static 'web/js/drag.js' %}" rel="script/text"></script>
 <script src="{%static 'web/js/speak.js' %}" rel="script/text"></script>
+<script src="{%static 'web/js/slide.js' %}" rel="script/text"></script>
 </body>
 </html>

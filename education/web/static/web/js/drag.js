@@ -1,8 +1,8 @@
 const container = document.getElementById('container');
 const scoreDisplay = document.getElementById('score-value'); 
-//alert('scoreDisplay : '+ typeof scoreDisplay);
 
-let score = 0;
+
+let score = 0;alert('scoreDisplay : '+score);
 const pictureDivs = document.createElement('div');
 pictureDivs.className += ' d-flex justify-content-end';
 const wordDivs = document.createElement('div');
@@ -19,6 +19,7 @@ vocas.forEach((voca) => {
     wordDiv.classList.add('words');
     wordDiv.className +=' p-2 flex-fill align-self-center text-center';
     wordDiv.textContent = voca.name;
+    wordDiv.id = voca.name;
     wordDiv.setAttribute('draggable', true);
 
     // Xử lý sự kiện kéo và thả
@@ -46,7 +47,7 @@ container.addEventListener('drop', (e) => {
         if (word === pictureName) {
             score++;
             scoreDisplay.textContent = score;
-            picture.querySelector('.words').remove();
+            wordDivs.querySelector('#'+word).remove();
         }
     }
 });
