@@ -5,7 +5,7 @@
         function randomSort(a, b) {
           return Math.random() - 0.5;
         }        
-        sentences.sort(randomSort);
+        sentences.sort(randomSort); //alert(typeof sentences);
         var i = 0;
 
         function showquestionrearrange(i){
@@ -46,17 +46,16 @@
                     var myArray = $("#sortable div");
                     myArray.each(function() {
                       // Lấy giá trị HTML của từng thẻ <li> và in ra
-                      var htmlValue = $(this).html();           //alert('ptu hiện tại : '+htmlValue);
+                      var htmlValue = $(this).html();          //alert('ptu hiện tại : '+htmlValue);
                       currentOrder += htmlValue + " ";
                     });
-                    var ans = btnAns.name+" ";
-                                                                //alert('mảng hiện tại : '+currentOrder);
+                    var ans = btnAns.name+" ";                 //alert('mảng hiện tại : '+currentOrder);
                     // So sánh thứ tự với câu gốc
                     if (currentOrder == ans) {
-                        alert('Chúc mừng! Bạn đã sắp xếp câu ['+ans+']đúng thứ tự.['+currentOrder+']');
+                        alert('Chúc mừng! Bạn đã sắp xếp câu [ '+ans+' ]đúng thứ tự.['+currentOrder+']');
                         i++;showquestionrearrange(i);
                     } else {
-                        alert('Câu bạn sắp xếp ['+ans+']chưa đúng thứ tự. Hãy thử lại.['+currentOrder+']');
+                        alert('Câu bạn sắp xếp [ '+ans+' ] chưa đúng thứ tự. Hãy thử lại.['+currentOrder+']');
                         i++;showquestionrearrange(i);
                     }
                   });

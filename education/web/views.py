@@ -14,4 +14,4 @@ def home(request):
 def drag(request):
     sentences = Question.objects.all();
     context ={'sentences':sentences}
-    return render(request,'drag.html',context)
+    return render(request,'rearrange.html',context)

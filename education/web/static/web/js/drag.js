@@ -5,7 +5,7 @@ const scoreDisplay = document.getElementById('score-value');
 let score = 0;//alert('scoreDisplay : '+score);
 const pictureDivs = document.createElement('div');
 pictureDivs.className += ' d-flex justify-content-end';
-const wordDivs = document.createElement('div');
+const wordDivs = document.createElement('div'); 
 wordDivs.className += ' d-flex justify-content-end';
 // Tạo các thành phần cho trò chơi
 vocas.forEach((voca) => {
@@ -32,7 +32,29 @@ vocas.forEach((voca) => {
     wordDivs.appendChild(wordDiv);
     
 });
+const childrenArray = Array.from(wordDivs.children);
+
+// Function to shuffle an array using the Fisher-Yates algorithm
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+// Shuffle the children
+shuffleArray(childrenArray);
+// Clear the current children from wordDiv
+while (wordDivs.firstChild) {
+  wordDivs.removeChild(wordDivs.firstChild);
+}
+
+// Append the shuffled children back to wordDiv
+for (const child of childrenArray) {
+  wordDivs.appendChild(child);
+}
+
 container.appendChild(pictureDivs);container.appendChild(wordDivs);
+alert('typeof wordDivs');
 
 container.addEventListener('dragover', (e) => {
     e.preventDefault();
