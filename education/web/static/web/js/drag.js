@@ -2,7 +2,7 @@ const container = document.getElementById('container');
 const scoreDisplay = document.getElementById('score-value'); 
 
 
-let score = 0;alert('scoreDisplay : '+score);
+let score = 0;//alert('scoreDisplay : '+score);
 const pictureDivs = document.createElement('div');
 pictureDivs.className += ' d-flex justify-content-end';
 const wordDivs = document.createElement('div');
@@ -12,7 +12,8 @@ vocas.forEach((voca) => {
     const pictureDiv = document.createElement('div');
     pictureDiv.classList.add('pictures');
     pictureDiv.name = voca.name;
-    pictureDiv.className +=' p-2 flex-fill align-self-center';
+    pictureDiv.className +=' p-2 flex-fill align-self-center card';
+    pictureDiv.style.width = '50px';
     pictureDiv.innerHTML = `<img src="${voca.image.url}" class="img-fluid shadow-2-strong" alt="${voca.name}" />`;
 
     const wordDiv = document.createElement('div');

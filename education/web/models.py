@@ -13,6 +13,14 @@ class Vocabulary(models.Model):
     class Meta:
         verbose_name = 'Từ vựng'
         verbose_name_plural = 'Từ vựng'
+class Question(models.Model):
+    excercise = models.CharField(max_length=255)
+    title = models.CharField(max_length=255)
+    question = models.CharField(max_length=255,default="")
+    content = models.CharField(max_length=255)
+    def __str__(self):
+        return f"Excercise: {self.excercise}\nTitle: {self.title}\nContent: {self.content}"
+
 class CambridgeLevel:
     def __init__(self, level_name, description):
         self.level_name = level_name

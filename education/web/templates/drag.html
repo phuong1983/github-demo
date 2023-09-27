@@ -1,88 +1,49 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trò chơi kéo thả</title>
-    <link rel="stylesheet" href="styles.css">
-    <style type=”text/css”>
-      .container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        border : 10px solid green;
-      } 
-    
-    .pictures, .words {
-        margin: 10px;
-    }
-    
-    .draggable {
-        cursor: grab;
-        user-drag: none;
-        -webkit-user-drag: none;
-        touch-action: none;
-    }
+    <title>Sắp xếp câu</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <style>
+        .sortable-item {
+            display: inline-block; /* or use 'inline' */
+            margin-right: 10px; /* Adjust margin as needed */
+            border : red solid 2px;
+            border-radius : 3px;
+            background : blue;
+            width : 125px;
+            text-align : center;
+            text-color : white;
+          }
     </style>
-
 </head>
 <body>
-    <div class="container" id="container">
-        <!-- Thành phần sẽ được thêm vào đây bằng JavaScript -->
+    <div id="sortable">
+        <!-- Đặt các từ vào ô chữ -->
+        <div class="sortable-item">this</div>
+        <div class="sortable-item">is</div>
+        <div class="sortable-item">my</div>
+        <div class="sortable-item">computer</div>
     </div>
-    <div id="score">Điểm: <span id="score-value">0</span></div>
+    <button id="check-button">Kiểm tra</button>
 
-    <script >
-        const container = document.getElementById('container');
-const scoreDisplay = document.getElementById('score-value');
 
-let score = 0;
 
-// Dữ liệu về các button và hình ảnh
-const vocas = [
-    { name: 'Apple', image: { url: 'apple.jpg' } },
-    { name: 'Banana', image: { url: 'banana.jpg' } },
-    // Thêm dữ liệu cho các button và hình ảnh khác ở đây
-];
 
-// Tạo các thành phần cho trò chơi
-vocas.forEach((voca) => {
-    const pictureDiv = document.createElement('div');
-    pictureDiv.classList.add('pictures');
-    pictureDiv.innerHTML = `<img src="${voca.image.url}" class="img-fluid shadow-2-strong" alt="${voca.name}" />`;
-
-    const wordDiv = document.createElement('div');
-    wordDiv.classList.add('words');
-    wordDiv.textContent = voca.name;
-    wordDiv.setAttribute('draggable', true);
-
-    // Xử lý sự kiện kéo và thả
-    wordDiv.addEventListener('dragstart', (e) => {
-        e.dataTransfer.setData('text/plain', voca.name);
-    });
-
-    pictureDiv.appendChild(wordDiv);
-    container.appendChild(pictureDiv);
-});
-
-container.addEventListener('dragover', (e) => {
-    e.preventDefault();
-});
-
-container.addEventListener('drop', (e) => {
-    e.preventDefault();
-    const word = e.dataTransfer.getData('text/plain');
-    const picture = e.target.closest('.pictures');
-
-    if (picture) {
-        const pictureName = picture.querySelector('.words').textContent;
-        if (word === pictureName) {
-            score++;
-            scoreDisplay.textContent = score;
-            picture.querySelector('.words').remove();
-        }
-    }
-});
-    </script>
+<script>
+    const sentences = [];
+    {% for sentence in sentences %}
+    var str = '{{sentence.content}}';
+    var myArray = str.split(" "); 
+    var newsentence = { excercise: '{{sentence.excercise}}',title:'{{sentence.title}}',
+                        content:'{{sentence.content}}',words:myArray }  ;
+    sentences.push(newsentence);        
+    {% endfor %}
+</script>
+<script src="{%static 'web/js/rearrange.js' %}" rel="script/text"></script>
 </body>
 </html>

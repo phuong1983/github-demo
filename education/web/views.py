@@ -12,4 +12,6 @@ def home(request):
 
     return render(request,'home.html',context)
 def drag(request):
-    return render(request,'drag.html')
+    sentences = Question.objects.all();
+    context ={'sentences':sentences}
+    return render(request,'drag.html',context)
