@@ -18,7 +18,7 @@ vocas.forEach((voca) => {
 
     const wordDiv = document.createElement('div');
     wordDiv.classList.add('words');
-    wordDiv.className +=' p-2 flex-fill align-self-center text-center';
+    wordDiv.className +=' p-2 flex-fill align-self-center text-center card';
     wordDiv.textContent = voca.name;
     wordDiv.id = voca.name;
     wordDiv.setAttribute('draggable', true);
@@ -34,7 +34,7 @@ vocas.forEach((voca) => {
 });
 const childrenArray = Array.from(wordDivs.children);
 
-// Function to shuffle an array using the Fisher-Yates algorithm
+// --------------------------------------------Function to shuffle an array using the Fisher-Yates algorithm
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -47,14 +47,12 @@ shuffleArray(childrenArray);
 while (wordDivs.firstChild) {
   wordDivs.removeChild(wordDivs.firstChild);
 }
-
 // Append the shuffled children back to wordDiv
 for (const child of childrenArray) {
   wordDivs.appendChild(child);
-}
+}//-------------------------------------------------------------------------------------------------------------
 
-container.appendChild(pictureDivs);container.appendChild(wordDivs);
-alert('typeof wordDivs');
+container.appendChild(pictureDivs);container.appendChild(wordDivs); //alert('typeof wordDivs');
 
 container.addEventListener('dragover', (e) => {
     e.preventDefault();

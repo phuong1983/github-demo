@@ -11,7 +11,11 @@ def home(request):
     context = {'vocas':vocas,'first_voca':first_voca}
 
     return render(request,'home.html',context)
-def drag(request):
+def rearrange(request):
     sentences = Question.objects.all();
     context ={'sentences':sentences}
     return render(request,'rearrange.html',context)
+def orderword(request):
+    vocas = Vocabulary.objects.all();
+    context = {'vocas':vocas}
+    return render(request,'orderword.html',context)
