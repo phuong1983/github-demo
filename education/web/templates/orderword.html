@@ -9,7 +9,16 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
             <style>
-
+                .sortable-item {
+                    display: inline-block; /* or use 'inline' */
+                    margin-right: 10px; /* Adjust margin as needed */
+                    border : red solid 2px;
+                    border-radius : 3px;
+                    background : blue;
+                    width : 125px;
+                    text-align : center;
+                    text-color : white;
+                  }
             </style>
 </head>
 <body>
@@ -19,6 +28,15 @@
           <!-- Thành phần sẽ được thêm vào đây bằng JavaScript -->         
         </div>
         <div id="score">Điểm: <span id="score-value">0</span></div>
+
+        <div id="sortable">
+          <!-- Đặt các từ vào ô chữ -->
+          <div class="sortable-item">this</div>
+          <div class="sortable-item">is</div>
+          <div class="sortable-item">my</div>
+          <div class="sortable-item">computer</div>
+      </div>
+      <button id="check-button">Kiểm tra</button>
     </div>
 
     <script >
@@ -41,23 +59,19 @@
     let score = 0;//alert('scoreDisplay : '+score);
 
     const pictureDivs = document.createElement('div');
-    pictureDivs.className += ' d-flex justify-content-end';
+    pictureDivs.className += ' d-flex justify-content-end card';
     const wordDivs = document.createElement('div'); 
-    wordDivs.className += ' d-flex justify-content-end';
+    wordDivs.className += ' d-flex justify-content-end card';
 
-    let i=0;
+    let i=0;                                      //console.log(vocas[i]);
+    function orderwordslide(i){
     // Tạo các thành phần cho trò chơi
         const pictureDiv = document.createElement('div');
         pictureDiv.classList.add('pictures');
-        pictureDiv.name = vocas[i].name; alert(vocas[i].name);console.log(vocas[i].name)
+        pictureDiv.name = vocas[i].name; //alert(vocas[i].name);console.log(vocas[i].name)
         pictureDiv.className +=' p-2 flex-fill align-self-center card';
-        // Tạo border
-        pictureDiv.style.border = '1px solid black'; // Chọn màu và độ rộng phù hợp
-        //pictureDiv.style.border_radius = '2px'
-                // Thiết lập chiều rộng và chiều cao
-        pictureDiv.style.width = '100px'; // Thay đổi giá trị để đáp ứng chiều rộng mong muốn
-        pictureDiv.style.height = '50px'; // Thay đổi giá trị để đáp ứng chiều cao mong muốn
-        pictureDiv.innerHTML = `<img src="${vocas[i].image.url}" class="img-fluid shadow-2-strong" alt="${vocas[i].name}" />`;
+        pictureDiv.innerHTML = `<img src="${vocas[i].image.url}" 
+        class="img-fluid shadow-2-strong" style="width:300px;height:280px; alt="${vocas[i].name}" />`;
     
         const wordDiv = document.createElement('div');
         wordDiv.classList.add('words');
@@ -65,43 +79,95 @@
         wordDiv.textContent = vocas[i].name;
         wordDiv.id = vocas[i].name;
         wordDiv.setAttribute('draggable', true);
-                // Tạo border
-        wordDiv.style.border = '1px solid black'; // Chọn màu và độ rộng phù hợp
-        //wordDiv.style.border_radius = '2px'
-                // Thiết lập chiều rộng và chiều cao
-        wordDiv.style.width = '100px'; // Thay đổi giá trị để đáp ứng chiều rộng mong muốn
-        wordDiv.style.height = '50px'; // Thay đổi giá trị để đáp ứng chiều cao mong muốn
     
-        // Xử lý sự kiện kéo và thả
-        wordDiv.addEventListener('dragstart', (e) => {
-            e.dataTransfer.setData('text/plain', vocas[i].name);//alert(pictureDiv.name);
-        });
-    
-        pictureDivs.appendChild(pictureDiv);
-        wordDivs.appendChild(wordDiv);
-        
-    });
-    const childrenArray = Array.from(wordDivs.children);
-    
-    // --------------------------------------------Function to shuffle an array using the Fisher-Yates algorithm
-    function shuffleArray(array) {
-      for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
+        //pictureDivs.appendChild(pictureDiv);
+        //wordDivs.appendChild(wordDiv);
+        if (container.hasChildNodes()) {
+          // Xóa tất cả các phần tử con
+          while (container.firstChild) {
+              container.removeChild(container.firstChild);
+          }
+        }
+
+      container.appendChild(pictureDiv);
+      container.appendChild(wordDiv); //alert('typeof wordDivs');
+    }
+
+  function explodeAndShuffle(word) {  //--------------------------------shuffle word-------------------------------
+    // Explode the word into letters
+    let letters = word.split('');
+  
+    // Shuffle the letters
+    for (let ii = letters.length - 1; ii > 0; ii--) {
+      const jj = Math.floor(Math.random() * (ii + 1));
+      [letters[ii], letters[jj]] = [letters[jj], letters[ii]];
+    }
+  
+    // Join the shuffled letters back into a string
+    //let shuffledWord = letters.join('');
+    //return shuffledWord;
+    return letters
+  }                                   //--------------------------------shuffle word-------------------------------
+  
+  if(i>2){
+    i=0;orderwordslide(i);
+  } else { orderwordslide(i)}
+  console.log(explodeAndShuffle(vocas[i].name));
+  
+  //var i = 0;
+  const container_sortable = document.getElementById('sortable');
+  const btnAns = document.getElementById('check-button');
+  function showwordrearrange(i){
+      var sen = explodeAndShuffle(vocas[i].name);
+      btnAns.name = vocas[i].name;
+      if (container_sortable.hasChildNodes()) {
+        // Xóa tất cả các phần tử con
+        while (container_sortable.firstChild) {
+            container_sortable.removeChild(container_sortable.firstChild);
+        }
       }
-    }
-    // Shuffle the children
-    shuffleArray(childrenArray);
-    // Clear the current children from wordDiv
-    while (wordDivs.firstChild) {
-      wordDivs.removeChild(wordDivs.firstChild);
-    }
-    // Append the shuffled children back to wordDiv
-    for (const child of childrenArray) {
-      wordDivs.appendChild(child);
-    }//-------------------------------------------------------------------------------------------------------------
+      sen.forEach((word) => {
+          //alert(sentence.content);
+          const letterDiv = document.createElement('div');
+          letterDiv.classList.add('sortable-item');
+          //pictureDiv.name = sentence.name;
+          letterDiv.className +=' p-2 flex-fill align-self-center';
+          letterDiv.innerHTML = word;
+             
+          container_sortable.appendChild(letterDiv);
+          
+      });
+  }
+  showwordrearrange(i);
+  $(document).ready(function () {
+    // Kích hoạt tính năng kéo thả
+    $("#sortable").sortable();
+    $("#sortable").disableSelection();
     
-    container.appendChild(pictureDivs);container.appendChild(wordDivs); //alert('typeof wordDivs');
+    // Khi người chơi nhấp vào nút kiểm tra
+    $("#check-button").click(function () {
+        var currentOrder='';
+        // Lấy thứ tự hiện tại của các từ
+        $("#sortable").ready(function() {  
+            // Chọn tất cả các thẻ <li> trong danh sách có id "sortable"
+            var myArray = $("#sortable div");
+            myArray.each(function() {
+              // Lấy giá trị HTML của từng thẻ <li> và in ra
+              var htmlValue = $(this).html();          //alert('ptu hiện tại : '+htmlValue);
+              currentOrder += htmlValue;
+            });
+            var ans = btnAns.name;                 //alert('mảng hiện tại : '+currentOrder);
+            // So sánh thứ tự với câu gốc
+            if (currentOrder == ans) {
+                alert('Chúc mừng! Bạn đã sắp xếp câu [ '+ans+' ]đúng thứ tự.['+currentOrder+']');
+                i++; if (i>2) { i=0; }; showwordrearrange(i);orderwordslide(i);
+            } else {
+                alert('Câu bạn sắp xếp [ '+ans+' ] chưa đúng thứ tự. Hãy thử lại.['+currentOrder+']');
+                i++; if (i>2) { i=0; };showwordrearrange(i);orderwordslide(i);
+            }
+          });
+    });
+});
 </script>
 <script src="{%static 'web/js/rearrange.js' %}" rel="script/text"></script>
 </body>

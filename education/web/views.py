@@ -19,3 +19,7 @@ def orderword(request):
     vocas = Vocabulary.objects.all();
     context = {'vocas':vocas}
     return render(request,'orderword.html',context)
+def drag(request):
+    vocas = Vocabulary.objects.all()
+    context = {'vocas':vocas}
+    return render(request,'drag.html',context)

@@ -53,10 +53,10 @@
                     // So sánh thứ tự với câu gốc
                     if (currentOrder == ans) {
                         alert('Chúc mừng! Bạn đã sắp xếp câu [ '+ans+' ]đúng thứ tự.['+currentOrder+']');
-                        i++;showquestionrearrange(i);
+                        i++; if (i>2) { i=0; }; showquestionrearrange(i);
                     } else {
                         alert('Câu bạn sắp xếp [ '+ans+' ] chưa đúng thứ tự. Hãy thử lại.['+currentOrder+']');
-                        i++;showquestionrearrange(i);
+                        i++; if (i>2) { i=0; };showquestionrearrange(i);
                     }
                   });
 
