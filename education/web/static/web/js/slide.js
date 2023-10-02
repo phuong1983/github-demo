@@ -1,5 +1,5 @@
 var imgIndex = 0; 
-const textAreaSpeak = document.getElementById('textAreaSpeak')
+const textAreaSpeak = document.getElementById('textAreaSpeak');
 
 function speakword(word){
     var newtext = word;

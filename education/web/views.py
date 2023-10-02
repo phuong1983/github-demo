@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import *
+import re
 
 # Create your views here.
 def home(request):
@@ -23,3 +24,14 @@ def drag(request):
     vocas = Vocabulary.objects.all()
     context = {'vocas':vocas}
     return render(request,'drag.html',context)
+def reorder(request):
+    #myString = "any word here related to be replaced (q intro-a q). (r order1- there are something need reorder r)"
+    
+    # output1 = re.sub(r"($ q\s?.*\w{1,}\s?q $)", r"<span class='ans_word'>\1</span>", myString)
+    # output2 = re.sub(r"$ r\s?(.*\w{1,})\s?r $", r'<p name="\1" class="order">\1</p>', output1)
+    #print(output2)
+    txt = "any word here related to be replaced (q intro-a q). (r order1- there are something need reorder r)"
+    x = re.sub("\(q", '<span class="ans_word">', txt)
+    x= re.sub("q\)", '</span>"', x)
+    context ={'myString':x}
+    return render(request,'reorder.html',context)

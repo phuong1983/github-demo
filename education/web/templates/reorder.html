@@ -1,0 +1,106 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sắp xếp câu</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <style>
+
+    </style>
+    <style type=”text/css”>
+      .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border : 10px solid green;
+      } 
+    
+    .pictures, .words {
+        margin: 10px;
+    }
+    
+    .draggable {
+        cursor: grab;
+        user-drag: none;
+        -webkit-user-drag: none;
+        touch-action: none;
+    }
+    </style>
+</head>
+<body>
+    <div id="order">
+    {{myString}}
+    </div>
+    <div id="maincontent"> 
+        <div name='ans_word_q1' >	<!------- mấu đặt câu cho điền đáp án vào input ------>
+            <li>thực hiện việc thay thế qbq <span class="ans_word">(q eq1-b q)</span> bằng một input <span class="ans_word">(q eq2-ab q)</span></li>
+        </div>
+       <div name='ans_word_q1' >
+            <li>thực hiện việc thay thế abc <span class="ans_word">(q eq3-abc q)</span> bằng một input</li>
+       </div>
+   
+		</div>
+        <script>			//code xử lý việc tạo ra code điền đáp án vào ô trống
+            var body_content = document.getElementById('maincontent');alert(body_content.innerHTML);
+            var myPattern = /\(q\s?(.*\w{1,})\s?q\)/;		//b
+            var collection = myPattern.exec(body_content)[1];alert(body_content+'br'+collection);
+        
+             var ans_word = document.getElementsByClassName('ans_word');
+             for (var i = 0; i < ans_word.length; i++) {
+               (function () {
+        
+                 var content = ans_word[i].innerHTML;	     	
+        
+                 var myPattern = /\(q\s?(.*\w{1,})\s?q\)/;		//b
+                 var str = myPattern.exec(content)[1];
+        
+                 var myArray = str.split('-');														//e1q1,abc
+                 var new_str = '<input type="text" name="ans-'+myArray[1]+'" id="'+myArray[0]+'">';	//ans-abc
+                 var wordsearch = myArray[0];														//e1q1
+        
+                 ans_word[i].innerHTML = content.replace(/\(q\s?(.*\w{1,})\s?q\)/i, new_str);
+                 
+                 var element =  document.getElementById(wordsearch); 
+                 //alert(wordsearch+' : chiều dài mảng : '+element.length);
+                 
+                 element.addEventListener('blur',function(){
+                     if ('ans-'+this.value==this.getAttribute('name')) {
+                         
+                         var remove_E=document.getElementById('response'+this.getAttribute('id'));
+                         if(remove_E){document.getElementById('footer').removeChild(remove_E);}
+                         
+        
+                         var new_element = document.createElement('p');
+                         new_element.setAttribute('id','response'+this.getAttribute('id'));
+                         new_element.appendChild(
+                             document.createTextNode('đáp án:'+myArray[0]+'::'+this.getAttribute('name'))
+                             );
+                         document.getElementById('footer').appendChild(new_element);
+        
+                     }else{
+                         var remove_E=document.getElementById('response'+this.getAttribute('id'));
+                         if (remove_E) {document.getElementById('footer').removeChild(remove_E)};
+        
+                         var new_element = document.createElement('p');
+                         new_element.setAttribute('id','response'+this.getAttribute('id'));
+                         new_element.appendChild(
+                             document.createTextNode('đáp án:'+myArray[0]+'::' + this.getAttribute('name')+' của bạn  là : '+this.value
+                             ));
+                         document.getElementById('footer').appendChild(new_element);
+                     }
+                 },false);
+        
+               }());
+        
+             }
+        </script>
+        
+    <script >
+
+    </script>
+</body>
+</html>

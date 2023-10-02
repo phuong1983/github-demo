@@ -34,25 +34,7 @@
       }
       const csrftoken = getCookie('csrftoken');
     </script>
-    <style type=”text/css”>
-      .container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        border : 10px solid green;
-      } 
-    
-    .pictures, .words {
-        margin: 10px;
-    }
-    
-    .draggable {
-        cursor: grab;
-        user-drag: none;
-        -webkit-user-drag: none;
-        touch-action: none;
-    }
-    </style>
+
     <title>education</title>
 </head>
 <body>
@@ -122,30 +104,19 @@
   </div>
 </nav>
 
-  
+<script >
+  // Dữ liệu về các button và hình ảnh
+  const vocas = []
+  {% for voca in vocas %}
+  var newvoca = { name: '{{voca.name}}', image: { url: '{{voca.image.url}}' } }  ;
+  vocas.push(newvoca);
+  {% endfor %}
 
-<div class="container">
-
-  <div class="container" id="container">
-    <!-- Thành phần sẽ được thêm vào đây bằng JavaScript -->
-</div>
-
-
-</div>
-<div id="score">Điểm: <span id="score-value">0</span></div>
-    <script >
-          // Dữ liệu về các button và hình ảnh
-          const vocas = []
-          {% for voca in vocas %}
-          var newvoca = { name: '{{voca.name}}', image: { url: '{{voca.image.url}}' } }  ;
-          vocas.push(newvoca);
-          {% endfor %}
-
-          function randomSort(a, b) {
-            return Math.random() - 0.5;
-          }          
-          vocas.sort(randomSort);
-    </script>
+  function randomSort(a, b) {
+    return Math.random() - 0.5;
+  }          
+  vocas.sort(randomSort);
+</script>
 
 
 <div class="card" style="width: 28rem;">
@@ -156,6 +127,8 @@
       <input type="button" id="stopBtn" name="stopBtn" value="stopBtn" style="margin:20px 0 20px;width:100px;height:25px">
       <h5>Slide word</h5>
       <p id="textAreaSpeak" class="card-text" rows="4" cols="50">{{first_voca.name}}</p>
+    </div>
+  </div>
     <div style="clear:both"></div>
 
 
@@ -169,7 +142,6 @@
 
 
 <script src="{%static 'web/js/cart.js' %}" rel="script/text"></script>
-<script src="{%static 'web/js/drag.js' %}" rel="script/text"></script>
 <script src="{%static 'web/js/speak.js' %}" rel="script/text"></script>
 <script src="{%static 'web/js/slide.js' %}" rel="script/text"></script>
 </body>
