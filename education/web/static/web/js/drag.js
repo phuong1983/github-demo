@@ -17,7 +17,7 @@ vocas.forEach((voca) => {
     pictureDiv.innerHTML = `<img src="${voca.image.url}" class="img-fluid shadow-2-strong" alt="${voca.name}" />`;
 
     const wordDiv = document.createElement('div');
-    wordDiv.classList.add('words');
+    wordDiv.classList.add('words draggable');
     wordDiv.className +=' p-2 flex-fill align-self-center text-center card';
     wordDiv.textContent = voca.name;
     wordDiv.id = voca.name;

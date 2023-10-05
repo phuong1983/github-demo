@@ -29,78 +29,120 @@
         -webkit-user-drag: none;
         touch-action: none;
     }
+    .sortable-item {
+        display: inline-block; /* or use 'inline' */
+        margin-right: 10px; /* Adjust margin as needed */
+        border : red solid 2px;
+        border-radius : 3px;
+        background : blue;
+        width : 125px;
+        text-align : center;
+        text-color : white;
+      }
     </style>
 </head>
 <body>
-    <div id="order">
-    {{myString}}
-    </div>
-    <div id="maincontent"> 
-        <div name='ans_word_q1' >	<!------- mấu đặt câu cho điền đáp án vào input ------>
-            <li>thực hiện việc thay thế qbq <span class="ans_word">(q eq1-b q)</span> bằng một input <span class="ans_word">(q eq2-ab q)</span></li>
-        </div>
-       <div name='ans_word_q1' >
-            <li>thực hiện việc thay thế abc <span class="ans_word">(q eq3-abc q)</span> bằng một input</li>
-       </div>
-   
-		</div>
-        <script>			//code xử lý việc tạo ra code điền đáp án vào ô trống
-            var body_content = document.getElementById('maincontent');alert(body_content.innerHTML);
-            var myPattern = /\(q\s?(.*\w{1,})\s?q\)/;		//b
-            var collection = myPattern.exec(body_content)[1];alert(body_content+'br'+collection);
-        
-             var ans_word = document.getElementsByClassName('ans_word');
-             for (var i = 0; i < ans_word.length; i++) {
-               (function () {
-        
-                 var content = ans_word[i].innerHTML;	     	
-        
-                 var myPattern = /\(q\s?(.*\w{1,})\s?q\)/;		//b
-                 var str = myPattern.exec(content)[1];
-        
-                 var myArray = str.split('-');														//e1q1,abc
-                 var new_str = '<input type="text" name="ans-'+myArray[1]+'" id="'+myArray[0]+'">';	//ans-abc
-                 var wordsearch = myArray[0];														//e1q1
-        
-                 ans_word[i].innerHTML = content.replace(/\(q\s?(.*\w{1,})\s?q\)/i, new_str);
-                 
-                 var element =  document.getElementById(wordsearch); 
-                 //alert(wordsearch+' : chiều dài mảng : '+element.length);
-                 
-                 element.addEventListener('blur',function(){
-                     if ('ans-'+this.value==this.getAttribute('name')) {
-                         
-                         var remove_E=document.getElementById('response'+this.getAttribute('id'));
-                         if(remove_E){document.getElementById('footer').removeChild(remove_E);}
-                         
-        
-                         var new_element = document.createElement('p');
-                         new_element.setAttribute('id','response'+this.getAttribute('id'));
-                         new_element.appendChild(
-                             document.createTextNode('đáp án:'+myArray[0]+'::'+this.getAttribute('name'))
-                             );
-                         document.getElementById('footer').appendChild(new_element);
-        
-                     }else{
-                         var remove_E=document.getElementById('response'+this.getAttribute('id'));
-                         if (remove_E) {document.getElementById('footer').removeChild(remove_E)};
-        
-                         var new_element = document.createElement('p');
-                         new_element.setAttribute('id','response'+this.getAttribute('id'));
-                         new_element.appendChild(
-                             document.createTextNode('đáp án:'+myArray[0]+'::' + this.getAttribute('name')+' của bạn  là : '+this.value
-                             ));
-                         document.getElementById('footer').appendChild(new_element);
-                     }
-                 },false);
-        
-               }());
-        
-             }
-        </script>
-        
-    <script >
 
+    <div class="container">
+      <div class="container" id="container">
+        <div id="maincontent">
+            <li>thực hiện việc thay thế qbq (q eq1-b q) bằng một input </li>
+            <li>thực hiện việc thay thế qaq (q eq2-a q) bằng một input </li>
+        </div>
+          <!-- Thành phần sẽ được thêm vào đây bằng JavaScript -->
+      </div>     
+    </div>
+    <div id="score">Điểm: <span id="score-value">0</span></div>
+</body>
+    
+    <script>
+        const container = document.getElementById('container');
+        const scoreDisplay = document.getElementById('score-value'); 
+
+        let score = 0;//alert('scoreDisplay : '+score);
+        const wordDivs = document.createElement('div'); 
+        wordDivs.className += ' d-flex justify-content-end';
+
+        // Lấy thẻ input và div chứa chuỗi cần thay thế
+        var maincontent = document.getElementById("maincontent");
+        myPattern = /\(q\s?(.*\w{1,})\s?q\)/g;
+        var content = maincontent.innerHTML.replace(myPattern, '<input type="text" class="inputBox">');
+        var collection = maincontent.innerHTML.match(myPattern);
+        maincontent.innerHTML = content;
+        var inputBox = document.getElementsByClassName("inputBox");console.log(": www : " + typeof inputBox);
+
+        for(let i = 0;i<  inputBox.length;i++){
+            console.log(i + ": www " +inputBox[i] + ';'+collection[i].slice(2,collection.length-4).split('-')[1]);
+        
+            // Lắng nghe sự kiện khi người dùng nhập giá trị vào input
+            inputBox[i].addEventListener("blur", function() {
+                var inputValue = inputBox[i].value;
+                // Kiểm tra nếu giá trị nhập vào là "eq1-b" thì hiển thị thông báo
+                if (inputValue.trim() == collection[i].slice(2,collection.length-4).split('-')[1].trim()) {
+                    console.log("Chúc mừng bạn đã trả lời đúng : " 
+                    + collection[i].slice(2,collection.length-4).split('-')[1]+';'+inputValue);
+                    score++;
+                    scoreDisplay.textContent = score;
+                }
+                else{
+                    console.log('fail : '+ collection[i].slice(2,collection.length-4).split('-')[1]+';'+inputValue);
+                }
+            });
+            const ansDiv = document.createElement('div');
+            ansDiv.classList.add('words');
+            ansDiv.className +=' p-2 flex-fill align-self-center text-center card';
+            ansDiv.textContent = collection[i].slice(2,collection.length-4).split('-')[1];
+            ansDiv.id = collection[i].slice(2,collection.length-4).split('-')[1];
+            ansDiv.setAttribute('draggable', true);
+
+            // Xử lý sự kiện kéo và thả
+            ansDiv.addEventListener('dragstart', (e) => {
+                e.dataTransfer.setData('text/plain', collection[i].slice(2,collection.length-4).split('-')[1]);
+            });
+
+            wordDivs.appendChild(ansDiv);
+        }
+
+        const childrenArray = Array.from(wordDivs.children);
+
+        // --------------------------------------------Function to shuffle an array using the Fisher-Yates algorithm
+        function shuffleArray(array) {
+          for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+          }
+        }
+        // Shuffle the children
+        shuffleArray(childrenArray);
+        // Clear the current children from wordDiv
+        while (wordDivs.firstChild) {
+          wordDivs.removeChild(wordDivs.firstChild);
+        }
+        // Append the shuffled children back to wordDiv
+        for (const child of childrenArray) {
+          wordDivs.appendChild(child);
+        }//-------------------------------------------------------------------------------------------------------------
+        
+
+        container.appendChild(wordDivs);
+        
+        container.addEventListener('dragover', (e) => {
+            e.preventDefault();
+        });
+
+        container.addEventListener('drop', (e) => {
+            e.preventDefault();
+            const word = e.dataTransfer.getData('text/plain');
+            const txtbox = e.target.closest('.inputBox');
+            txtbox.value = word;
+            
+            // Tạo một sự kiện "blur" tới phần tử
+            var blurEvent = new Event("blur");
+            // Gọi sự kiện "blur" cho phần tử
+            txtbox.dispatchEvent(blurEvent);
+        });
+        console.log('indexHome : '+index)
     </script>
+        
 </body>
 </html>
