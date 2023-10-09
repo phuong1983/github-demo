@@ -1,8 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import User  # Sử dụng User mặc định của Django
+from django.contrib.auth.forms import UserCreationForm
 
 # Create your models here.
-
+class CreateUserForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ['username','email','first_name','last_name','password1','password2']  #bắt buộc tên phải vậy
 class Group(models.Model):
     name = models.CharField(max_length=100)
 
@@ -29,8 +33,8 @@ class Question(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField()
     # vocabularies = models.ManyToManyField('Vocabulary')
-class Quest(models.Model):
-    # exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
-    title = models.CharField(max_length=100)
-    content = models.TextField()
-    vocabularies = models.ManyToManyField('Vocabulary')
+# class Quest(models.Model):
+#     # exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
+#     title = models.CharField(max_length=100)
+#     content = models.TextField()
+#     vocabularies = models.ManyToManyField('Vocabulary')
