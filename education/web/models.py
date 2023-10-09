@@ -1,6 +1,16 @@
 from django.db import models
+from django.contrib.auth.models import User  # Sử dụng User mặc định của Django
 
 # Create your models here.
+
+class Group(models.Model):
+    name = models.CharField(max_length=100)
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    group = models.ForeignKey(Group, on_delete=models.SET_NULL, null=True)
+
+
 class Vocabulary(models.Model):
     name = models.CharField(max_length=255, unique=True, verbose_name='Tên từ vựng')
     image = models.ImageField(upload_to='vocabulary_images/', blank=True, null=True, verbose_name='Hình ảnh')
@@ -13,29 +23,14 @@ class Vocabulary(models.Model):
     class Meta:
         verbose_name = 'Từ vựng'
         verbose_name_plural = 'Từ vựng'
+
 class Question(models.Model):
-    excercise = models.CharField(max_length=255)
-    title = models.CharField(max_length=255)
-    question = models.CharField(max_length=255,default="")
-    content = models.CharField(max_length=255)
-    def __str__(self):
-        return f"Excercise: {self.excercise}\nTitle: {self.title}\nContent: {self.content}"
-
-class CambridgeLevel:
-    def __init__(self, level_name, description):
-        self.level_name = level_name
-        self.description = description
-
-    def __str__(self):
-        return f"{self.level_name} - {self.description}"
-
-class Student:
-    def __init__(self, name, age, cambridge_level):
-        self.name = name
-        self.age = age
-        self.cambridge_level = cambridge_level
-
-    def display_info(self):
-        print(f"Tên học sinh: {self.name}")
-        print(f"Tuổi: {self.age}")
-        print(f"Trình độ Cambridge: {self.cambridge_level}")
+    # exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
+    title = models.CharField(max_length=100)
+    content = models.TextField()
+    # vocabularies = models.ManyToManyField('Vocabulary')
+class Quest(models.Model):
+    # exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
+    title = models.CharField(max_length=100)
+    content = models.TextField()
+    vocabularies = models.ManyToManyField('Vocabulary')
