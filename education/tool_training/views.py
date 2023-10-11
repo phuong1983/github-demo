@@ -1,10 +1,3 @@
-from django.shortcuts import render
-
-# Create your views here.
-def index(request):
-    context = {}
-
-    return render(request,'index.html',context)
 from django.shortcuts import render,redirect
 from django.http import HttpResponse, JsonResponse
 from .models import *
@@ -15,6 +8,10 @@ from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
 
 # Create your views here.
+
+def index(request):
+    context = {}
+    return render(request,'index.html',context)
 def register(request):
     form = CreateUserForm()                             #UserCreationForm() được thay thế bởi class mới tạo bên models.py
     if request.method == 'POST':
@@ -48,10 +45,10 @@ def logoutPage(request):
 def home(request):
     vocas = Vocabulary.objects.all()
     first_voca = None
-
+    date_joined = request.user.date_joined
     if vocas.exists():
         first_voca = vocas[0]
-    context = {'vocas':vocas,'first_voca':first_voca}
+    context = {'vocas':vocas,'first_voca':first_voca,'date_joined':date_joined}
 
     return render(request,'home.html',context)
 def rearrange(request):
