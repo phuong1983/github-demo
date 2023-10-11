@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block banner-slider %}
+    <script >
+    // Dữ liệu về các button và hình ảnh
+    const vocas = []
+    {% for voca in vocas %}
+    var newvoca = { name: '{{voca.name}}', image: { url: '{{voca.image.url}}' } }  ;
+    vocas.push(newvoca);
+    {% endfor %}
+  
+    function randomSort(a, b) {
+      return Math.random() - 0.5;
+    }          
+    vocas.sort(randomSort);
+    var index = 1;
+  </script>
+  
+  
+  <div class="card" style="width: 28rem;">
+      <img id="sky" name="sky_3" class="card-img-top" style="width:300px;height:280px;float:left" src="{{first_voca.image.url}}" alt="not_found">
+      <div class="card-body" >
+        <input type="button" id="previousBtn" name="previousBtn" value="previousBtn" style="margin:20px 0 20px;width:100px;height:25px">
+        <input type="button" id="nextBtn" name="nextBtn" value="nextBtn" style="margin:20px 0 20px;width:100px;height:25px">
+        <input type="button" id="stopBtn" name="stopBtn" value="stopBtn" style="margin:20px 0 20px;width:100px;height:25px">
+        <h5>Slide word</h5>
+        <p id="textAreaSpeak" class="card-text" rows="4" cols="50">{{first_voca.name}}</p>
+      </div>
+    </div>
+      <div style="clear:both"></div>
+{% endblock banner-slider %}

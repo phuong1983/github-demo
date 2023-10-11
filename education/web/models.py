@@ -9,10 +9,12 @@ class CreateUserForm(UserCreationForm):
         fields = ['username','email','first_name','last_name','password1','password2']  #bắt buộc tên phải vậy
 class Group(models.Model):
     name = models.CharField(max_length=100)
+    def __str__(self):
+        return self.name
 
-class UserProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    group = models.ForeignKey(Group, on_delete=models.SET_NULL, null=True)
+# class UserProfile(models.Model):
+#     user = models.OneToOneField(User, on_delete=models.CASCADE)
+#     group = models.ForeignKey(Group, on_delete=models.SET_NULL, null=True)
 
 
 class Vocabulary(models.Model):
@@ -29,12 +31,8 @@ class Vocabulary(models.Model):
         verbose_name_plural = 'Từ vựng'
 
 class Question(models.Model):
-    # exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     content = models.TextField()
-    # vocabularies = models.ManyToManyField('Vocabulary')
-# class Quest(models.Model):
-#     # exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
-#     title = models.CharField(max_length=100)
-#     content = models.TextField()
-#     vocabularies = models.ManyToManyField('Vocabulary')
+class Unknow(models.Model):
+    title = models.CharField(max_length=100)
+    content = models.TextField()
