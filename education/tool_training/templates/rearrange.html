@@ -30,16 +30,17 @@
         <div class="sortable-item">computer</div>
     </div>
     <button id="check-button">Kiểm tra</button>
-
+    hello world
+{{sentences}}
 <script>
-    const sentences = [];
-    {% for sentence in sentences %}
-    var str = '{{sentence.content}}';
-    var myArray = str.split(" "); 
-    var newsentence = { excercise: '{{sentence.excercise}}',title:'{{sentence.title}}',
-                        content:'{{sentence.content}}',words:myArray }  ;
-    sentences.push(newsentence);        
-    {% endfor %}
+ //   const sentences = [];
+ //   {% for sentence in sentences %}
+ //   var str = '{{sentence.content}}';
+ //   var myArray = str.split(" "); 
+ //   var newsentence = { excercise: '{{sentence.excercise}}',title:'{{sentence.title}}',
+ //                       content:'{{sentence.content}}',words:myArray }  ;
+//    sentences.push(newsentence);        
+//    {% endfor %}
 </script>
 <script src="{%static 'web/js/rearrange.js' %}" rel="script/text"></script>
 </body>

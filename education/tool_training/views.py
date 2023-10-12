@@ -52,7 +52,7 @@ def home(request):
 
     return render(request,'home.html',context)
 def rearrange(request):
-    sentences = Question.objects.all();
+    sentences = Question.objects.filter(title = 'rearrange1')
     context ={'sentences':sentences}
     return render(request,'rearrange.html',context)
 def orderword(request):

@@ -46,19 +46,21 @@ class Document_type(models.Model):
         ('Link MP3', 'Link MP3'),
         ('Link MP4', 'Link MP4'),
     )
-
+    name = models.CharField(max_length=100,default='nobook')
     document_type = models.CharField(max_length=50, choices=MONTHLY_CHOICES)
     month = models.ForeignKey(Month, on_delete=models.CASCADE)
     vocabularies = models.ManyToManyField('Vocabulary')
     def __str__(self):
-        return self.document_type
+        return self.name
 
 class Book(models.Model):
+    name = models.CharField(max_length=100,default='nobook')
     document = models.ForeignKey(Document_type, on_delete=models.CASCADE)
     number = models.IntegerField()
     def __str__(self):
         return self.name
 class Unit(models.Model):
+    name = models.CharField(max_length=100,default='noUnit')
     document = models.ForeignKey(Book, on_delete=models.CASCADE)
     number = models.IntegerField()
     def __str__(self):
@@ -74,7 +76,7 @@ class Exercise(models.Model):
     title = models.CharField(max_length=100)
     vocabularies = models.ManyToManyField('Vocabulary')
     def __str__(self):
-        return self.name
+        return self.title
 
 class Question(models.Model):
     exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
@@ -82,6 +84,6 @@ class Question(models.Model):
     content = models.TextField()
     vocabularies = models.ManyToManyField('Vocabulary')
     def __str__(self):
-        return self.name
+        return self.title
 
 
