@@ -7,14 +7,17 @@
     <link rel="stylesheet" href="{%static 'web/css/style.css' %}">
     <link rel="stylesheet" href="{%static 'web/css/all.min.css' %}">
     <link rel="stylesheet" href="{%static 'web/css/main.css' %}">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>
     <script src="{%static 'web/js/all.min.js' %}" rel="script/text"></script>
     <script src="{%static 'web/js/myscript.js' %}" rel="script/text"></script>
-    <script type="text/javascript" > 
- 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript" >  
       function getCookie(name) {
         let cookieValue = null;
         if (document.cookie && document.cookie !== '') {
@@ -106,16 +109,13 @@
 
 
 {% block banner-slider %}{% endblock banner-slider %}
-{% block main-contain %}{% endblock main-contain %}
-{% block cart-content %}{% endblock cart-content %}
-{% block content_checkout %}{% endblock content_checkout %}
+{% block drag %}{% endblock drag %}
+{% block orderword %}{% endblock orderword %}
+{% block rearrange %}{% endblock rearrange %}
 {% block register %}{% endblock register %}
-{% block search %}{% endblock search %}
+{% block reorder %}{% endblock reorder %}
 
 
-
-<script src="{%static 'web/js/cart.js' %}" rel="script/text"></script>
-<script src="{%static 'web/js/speak.js' %}" rel="script/text"></script>
 <script src="{%static 'web/js/slide.js' %}" rel="script/text"></script>
 </body>
 </html>

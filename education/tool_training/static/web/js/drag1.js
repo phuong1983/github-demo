@@ -1,4 +1,5 @@
 const container = document.getElementById('container');
+container.className += ' d-flex justify-content-end';
 const scoreDisplay = document.getElementById('score-value'); 
 
 let score = 0;//alert('scoreDisplay : '+score);

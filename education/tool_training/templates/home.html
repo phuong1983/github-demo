@@ -1,9 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block banner-slider %}
-{{user.name}} abc
-
-{{date_joined|date:"d/m/Y H:i:s" }}
     <script >
     // Dữ liệu về các button và hình ảnh
     const vocas = []
@@ -18,7 +15,6 @@
     vocas.sort(randomSort);
     var index = 1;
   </script>
-  whats
   <div class="card" style="width: 28rem;">
       <img id="sky" name="sky_3" class="card-img-top" style="width:300px;height:280px;float:left" src="{{first_voca.image.url}}" alt="not_found">
       <div class="card-body" >
