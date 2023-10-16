@@ -18,6 +18,7 @@ class Vocabulary(models.Model):
     image = models.ImageField(upload_to='vocabulary_images/', blank=True, null=True, verbose_name='Hình ảnh')
     english_definition = models.TextField(verbose_name='Giải thích Anh-Anh')
     english_to_vietnamese_definition = models.TextField(verbose_name='Giải thích Anh-Việt')
+    example = models.CharField(max_length=255,blank=True)
 
     def __str__(self):
         return self.name
@@ -27,7 +28,7 @@ class Vocabulary(models.Model):
         verbose_name_plural = 'Từ vựng'
 
 class UserProfile(models.Model):    
-    name = models.CharField(max_length=100,default='noname')
+    name = models.CharField(max_length=100,default='insert-name')
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     group = models.ForeignKey(Group, on_delete=models.SET_NULL, null=True)
     def __str__(self):
@@ -54,13 +55,13 @@ class Document_type(models.Model):
         return self.name
 
 class Book(models.Model):
-    name = models.CharField(max_length=100,default='nobook')
+    name = models.CharField(max_length=100,default='insert-book')
     document = models.ForeignKey(Document_type, on_delete=models.CASCADE)
     number = models.IntegerField()
     def __str__(self):
         return self.name
 class Unit(models.Model):
-    name = models.CharField(max_length=100,default='noUnit')
+    name = models.CharField(max_length=100,default='insert-Unit')
     document = models.ForeignKey(Book, on_delete=models.CASCADE)
     number = models.IntegerField()
     def __str__(self):
