@@ -3,4 +3,5 @@ from . import views
 urlpatterns = [
     path('', views.unknow,name='unknow'),
     path('slide', views.slide,name='slide'),
+    path('fillBlankAns', views.fillBlankAns,name='fillBlankAns'),
 ]

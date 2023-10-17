@@ -29,7 +29,7 @@ class Vocabulary(models.Model):
 
 class UserProfile(models.Model):    
     name = models.CharField(max_length=100,default='insert-name')
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='tool_userprofile')
     group = models.ForeignKey(Group, on_delete=models.SET_NULL, null=True)
     def __str__(self):
         return self.name

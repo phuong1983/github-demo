@@ -6,13 +6,17 @@
         <div id="maincontent">
             <li>thực hiện việc thay thế qbq (q eq1-b q) bằng một input </li>
             <li>thực hiện việc thay thế qaq (q eq2-a q) bằng một input </li>
+            {% for voca in vocas %}
+              <li>{{voca.example}}</li>
+            {% endfor %}
         </div>
+        <div>
           <!-- Thành phần sẽ được thêm vào đây bằng JavaScript -->
           {{x}}
-      </div>     
+        </div>     
+      </div>
+      <div id="score">Điểm: <span id="score-value">0</span></div>
     </div>
-    <div id="score">Điểm: <span id="score-value">0</span></div>
-
     
     <script>
         const container = document.getElementById('container');
@@ -25,9 +29,19 @@
         // Lấy thẻ input và div chứa chuỗi cần thay thế
         var maincontent = document.getElementById("maincontent");
         myPattern = /\(q\s?(.*\w{1,})\s?q\)/g;
-        var content = maincontent.innerHTML.replace(myPattern, '<input type="text" class="inputBox">');
-        var collection = maincontent.innerHTML.match(myPattern);
-        maincontent.innerHTML = content;
+
+        //var content = maincontent.innerHTML.replace(myPattern, '<input type="text" class="inputBox">');
+        //var collection = maincontent.innerHTML.match(myPattern);
+        //maincontent.innerHTML = content;
+
+        maincontent.innerHTML = maincontent.innerHTML.replace(myPattern,function (match, p1) {
+          // match là kết quả của tìm kiếm, p1 là các nhóm bên trong mẫu
+          return "<input type='text' class='inputBox' name="+p1+">"; // Đảo ngày và tháng
+        });
+        
+        console.log(maincontent.innerHTML);
+        var collection = maincontent.innerHTML;
+
         var inputBox = document.getElementsByClassName("inputBox");console.log(": www : " + typeof inputBox);
 
         for(let i = 0;i<  inputBox.length;i++){
@@ -47,6 +61,8 @@
                     console.log('fail : '+ collection[i].slice(2,collection.length-4).split('-')[1]+';'+inputValue);
                 }
             });
+
+            //tạo ra các element để kéo thả vào textbox, được tự động tạo ra--------------------------------------
             const ansDiv = document.createElement('div');
             ansDiv.classList.add('words');
             ansDiv.className +=' p-2 flex-fill align-self-center text-center card';
@@ -83,7 +99,7 @@
         }//-------------------------------------------------------------------------------------------------------------
         
 
-        container.appendChild(wordDivs);
+        container.appendChild(wordDivs); //tạo hoàn chỉnh các element để trả lời vào textbox---------------------------
         
         container.addEventListener('dragover', (e) => {
             e.preventDefault();
@@ -100,6 +116,6 @@
             // Gọi sự kiện "blur" cho phần tử
             txtbox.dispatchEvent(blurEvent);
         });
-        console.log('indexHome : '+index)
+        //console.log('indexHome : '+index)
     </script>
 {% endblock reorder %}
