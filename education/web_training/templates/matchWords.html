@@ -1,2 +1,35 @@
 {% extends 'base1.html' %}
 {% load static %}
+{% block matchWords %}
+<div class="row box-element">
+    <h1>Match Words</h1>
+    <div class="col-md-8 card">
+        <div id='container'>
+
+        </div>
+    </div>
+    <div class="col-md-4 card" >
+        <h3>MCQ</h3>   
+        <div id="score">Điểm: <span id="score-value">0</span></div>
+        <div id='wordDivs' class="" >
+                         
+        </div>
+    </div>
+</div>
+<script >
+    // Dữ liệu về các button và hình ảnh
+    const vocas = []
+    {% for voca in vocas %}
+    var newvoca = { name: '{{voca.name}}', image: { url: '{{voca.image.url}}' } }  ;
+    console.log('{{voca.name}}');
+    vocas.push(newvoca);
+    {% endfor %}
+
+    function randomSort(a, b) {
+      return Math.random() - 0.5;
+    }          
+    vocas.sort(randomSort);
+    console.log(vocas.length);
+</script>     
+<script src="{%static 'web/js/matchWords.js' %}" rel="script/text"></script>
+{% endblock matchWords %}

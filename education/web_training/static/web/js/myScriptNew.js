@@ -25,13 +25,12 @@ function shuffleArray(array) {
 function createImgCard(imgUrl='-',imgName){
     const pictureDiv = document.createElement('div');
     pictureDiv.classList.add("dropTarget");
-    pictureDiv.name = voca.name;
-    pictureDiv.className +=' p-2 flex-fill flex-grow-1 align-self-center card';
-    pictureDiv.style.width = '50px';
+    pictureDiv.name = imgName;
+    pictureDiv.className +=' p-2 d-flex flex-wrap thumbnail align-self-center card';
     if(imgUrl=='-'){
       pictureDiv.innerHTML = "${imgName}"
     } else{
-      pictureDiv.innerHTML = `<img src="${imgUrl}" class="img-fluid shadow-2-strong" alt="${imgName}" />`;
+      pictureDiv.innerHTML = `<img src="${imgUrl}" class="img-fluid flex-wrap shadow-2-strong" alt="${imgName}" />`;
     }  
   
     return pictureDiv;
@@ -39,7 +38,7 @@ function createImgCard(imgUrl='-',imgName){
 function createItemCard(itemName){
     let wordDiv = document.createElement('div');
     wordDiv.classList.add('draggable');
-    wordDiv.className +=' p-2 flex-fill flex-grow-1  align-self-center text-center card words';
+    wordDiv.className +=' p-2 align-self-center text-center card words';
     wordDiv.textContent = itemName;
     wordDiv.id = itemName;
     wordDiv.setAttribute('draggable', true);

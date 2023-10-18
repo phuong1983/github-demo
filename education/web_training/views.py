@@ -24,3 +24,7 @@ def fillBlankAns(request):
     vocas = Vocabulary.objects.all()
     context = {'vocas':vocas}
     return render(request,'fillBlankAns.html',context)
+def matchWords(request):
+    vocas = Vocabulary.objects.all()
+    context = {'vocas':vocas}
+    return render(request,'matchWords.html',context)
