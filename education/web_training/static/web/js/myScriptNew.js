@@ -26,7 +26,7 @@ function createImgCard(imgUrl='-',imgName){
     const pictureDiv = document.createElement('div');
     pictureDiv.classList.add("dropTarget");
     pictureDiv.name = voca.name;
-    pictureDiv.className +=' p-2 flex-fill align-self-center card';
+    pictureDiv.className +=' p-2 flex-fill flex-grow-1 align-self-center card';
     pictureDiv.style.width = '50px';
     if(imgUrl=='-'){
       pictureDiv.innerHTML = "${imgName}"
@@ -39,7 +39,7 @@ function createImgCard(imgUrl='-',imgName){
 function createItemCard(itemName){
     let wordDiv = document.createElement('div');
     wordDiv.classList.add('draggable');
-    wordDiv.className +=' p-2 flex-fill align-self-center text-center card words';
+    wordDiv.className +=' p-2 flex-fill flex-grow-1  align-self-center text-center card words';
     wordDiv.textContent = itemName;
     wordDiv.id = itemName;
     wordDiv.setAttribute('draggable', true);
@@ -50,3 +50,11 @@ function createItemCard(itemName){
     });
     return wordDiv;
   }
+
+  
+function speakword(word){
+  var newtext = word;
+  var newutterance = new SpeechSynthesisUtterance(newtext);
+  window.speechSynthesis.speak(newutterance);
+  console.log(word);
+}

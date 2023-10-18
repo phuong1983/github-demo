@@ -1,11 +1,6 @@
 var imgIndex = 0; 
 const textAreaSpeak = document.getElementById('textAreaSpeak');
 
-function speakword(word){
-    var newtext = word;
-    var newutterance = new SpeechSynthesisUtterance(newtext);
-    window.speechSynthesis.speak(newutterance);
-  }
 function previousBtn(){
   var imgSlide = document.getElementById("sky");
   if (imgIndex>0) {
