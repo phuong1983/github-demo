@@ -12,7 +12,7 @@ wordDivs.className += ' d-flex justify-content-end';
 // Tạo các thành phần cho trò chơi
 function createImgCard(imgUrl='-',imgName){
   const pictureDiv = document.createElement('div');
-  pictureDiv.classList.add("${imgName}");
+  pictureDiv.classList.add(" dropTarget");
   pictureDiv.name = voca.name;
   pictureDiv.className +=' p-2 flex-fill align-self-center card';
   pictureDiv.style.width = '50px';
@@ -81,7 +81,7 @@ container.addEventListener('dragover', (e) => {
 container.addEventListener('drop', (e) => {
     e.preventDefault();
     const word = e.dataTransfer.getData('text/plain');
-    const picture = e.target.closest(".${imgName}");
+    const picture = e.target.closest(".dropTarget");
 
     if (picture) {
         const pictureName = picture.name;

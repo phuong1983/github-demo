@@ -105,3 +105,27 @@ $('.minus-wishlist').click(function(){
         }
     })
 })
+
+
+// --------------------------------------------Function to shuffle an array using the Fisher-Yates algorithm
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  }
+  function shuffleElement(wordDivs){
+      const childrenArray = Array.from(wordDivs.children);
+      // Shuffle the children
+      shuffleArray(childrenArray);
+      // Clear the current children from wordDiv
+      while (wordDivs.firstChild) {
+        wordDivs.removeChild(wordDivs.firstChild);
+      }
+      // Append the shuffled children back to wordDiv
+      for (const child of childrenArray) {
+        wordDivs.appendChild(child);
+      }
+  }
+  shuffleElement(wordDivs)
+  //-------------------------------------------------------------------------------------------------------------

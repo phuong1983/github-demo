@@ -10,7 +10,8 @@ from django.contrib import messages
 # Create your views here.
 
 def index(request):
-    context = {}
+    vocas = Vocabulary.objects.all()
+    context = {'vocas':vocas}
     return render(request,'index.html',context)
 def register(request):
     form = CreateUserForm()                             #UserCreationForm() được thay thế bởi class mới tạo bên models.py

@@ -36,16 +36,12 @@
 
         maincontent.innerHTML = maincontent.innerHTML.replace(myPattern,function (match, p1) {
           // match là kết quả của tìm kiếm, p1 là các nhóm bên trong mẫu
-          return "<input type='text' class='inputBox' name="+p1+">"; // Đảo ngày và tháng
+          return "<input type='text' class='inputBox dropTarget' name="+p1+">"; // Đảo ngày và tháng
         });
-        
-        console.log(maincontent.innerHTML);
         var collection = maincontent.innerHTML;
 
-        var inputBox = document.getElementsByClassName("inputBox");console.log(": www : " + typeof inputBox);
-
+        var inputBox = document.getElementsByClassName("inputBox");
         for(let i = 0;i<  inputBox.length;i++){
-            console.log(i + ": www " +inputBox[i] + ';'+collection[i].slice(2,collection.length-4).split('-')[1]);
         
             // Lắng nghe sự kiện khi người dùng nhập giá trị vào input
             inputBox[i].addEventListener("blur", function() {
@@ -78,8 +74,8 @@
             wordDivs.appendChild(ansDiv);
         }
 
+        
         const childrenArray = Array.from(wordDivs.children);
-
         // --------------------------------------------Function to shuffle an array using the Fisher-Yates algorithm
         function shuffleArray(array) {
           for (let i = array.length - 1; i > 0; i--) {
@@ -87,10 +83,8 @@
             [array[i], array[j]] = [array[j], array[i]];
           }
         }
-        // Shuffle the children
-        shuffleArray(childrenArray);
-        // Clear the current children from wordDiv
-        while (wordDivs.firstChild) {
+        shuffleArray(childrenArray);// Shuffle the children        
+        while (wordDivs.firstChild) {// Clear the current children from wordDiv
           wordDivs.removeChild(wordDivs.firstChild);
         }
         // Append the shuffled children back to wordDiv
@@ -108,7 +102,7 @@
         container.addEventListener('drop', (e) => {
             e.preventDefault();
             const word = e.dataTransfer.getData('text/plain');
-            const txtbox = e.target.closest('.inputBox');
+            const txtbox = e.target.closest('.dropTarget');
             txtbox.value = word;
             
             // Tạo một sự kiện "blur" tới phần tử
