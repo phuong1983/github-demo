@@ -28,3 +28,8 @@ def matchWords(request):
     vocas = Vocabulary.objects.all()
     context = {'vocas':vocas}
     return render(request,'matchWords.html',context)
+def arrangeSentence(request):
+    vocas = Vocabulary.objects.all()
+    dateJoined = request.user.date_joined
+    context = {'vocas':vocas,'dateJoined':dateJoined}
+    return render(request,'arrangeSentence.html',context)

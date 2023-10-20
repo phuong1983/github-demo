@@ -1,5 +1,6 @@
         // Dữ liệu về các button và hình ảnh
-        const container = document.getElementById('sortable');
+        // const container = document.getElementById('sortable');
+        const container = document.getElementById('container');
         const btnAns = document.getElementById('check-button');
 
         function randomSort(a, b) {

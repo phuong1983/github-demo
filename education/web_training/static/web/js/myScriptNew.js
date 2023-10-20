@@ -22,13 +22,13 @@ function shuffleArray(array) {
   //-------------------------------------------------------------------------------------------------------------
 
   // Tạo các thành phần cho trò chơi
-function createImgCard(imgUrl='-',imgName){
+function createImgCard(imgName,imgUrl='-'){
     const pictureDiv = document.createElement('div');
     pictureDiv.classList.add("dropTarget");
     pictureDiv.name = imgName;
     pictureDiv.className +=' p-2 d-flex flex-wrap thumbnail align-self-center card';
     if(imgUrl=='-'){
-      pictureDiv.innerHTML = "${imgName}"
+      pictureDiv.innerHTML = imgName;
     } else{
       pictureDiv.innerHTML = `<img src="${imgUrl}" class="img-fluid flex-wrap shadow-2-strong" alt="${imgName}" />`;
     }  
@@ -38,7 +38,7 @@ function createImgCard(imgUrl='-',imgName){
 function createItemCard(itemName){
     let wordDiv = document.createElement('div');
     wordDiv.classList.add('draggable');
-    wordDiv.className +=' p-2 align-self-center text-center card words';
+    wordDiv.className +=' p-2 align-self-center text-center card words word-card justify-content-evenly';
     wordDiv.textContent = itemName;
     wordDiv.id = itemName;
     wordDiv.setAttribute('draggable', true);

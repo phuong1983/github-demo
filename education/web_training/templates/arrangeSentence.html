@@ -1,0 +1,37 @@
+{% extends 'base1.html' %}
+{% load static %}
+{% block arrangeSentence %}
+
+<div class="row box-element">
+    <h1>ARRANGE SENTENCE</h1>
+    <div class="col-md-10 card">
+        <div id='container' class="row" >
+            <h3>example</h3>
+        </div>
+    </div>
+    <div class="col-md-2 card" >
+        <h3>Picture</h3>
+        <h5>dateJoined: {{dateJoined}}</h5>    
+        <button id="check-button">Kiểm tra</button>
+        <div id="score">Điểm: <span id="score-value">0</span></div>
+        <div id='wordDivs' class="" >
+                         
+        </div>
+    </div>
+</div>
+
+<script>
+   const sentences = [];
+   {% for voca in vocas %}
+   var str = '{{voca.example}}';
+   var myArray = str.split(" "); console.log(myArray);
+   var newsentence = {content:'{{voca.example}}',words:myArray }  ;console.log(newsentence.content);
+    sentences.push(newsentence);        
+    {% endfor %}
+    //var dateJoined = '{{dateJoined}}';console.log(dateJoined)
+    
+</script>
+<script src="" async defer></script>
+
+<script src="{%static 'web/js/arrangeSentence.js' %}" rel="script/text"></script>
+{% endblock arrangeSentence %}

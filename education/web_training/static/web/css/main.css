@@ -100,3 +100,13 @@ h1,h2,h3,h4,h5,h6{
 .flex-fill{
 	flex-grow: 1;
 }
+.word-card{
+        display: inline-block; /* or use 'inline' */
+        margin-right: 10px; /* Adjust margin as needed */
+        border : red solid 2px;
+        border-radius : 3px;
+        background : blue;
+        width : 125px;
+        text-align : center;
+		color : white;
+}

@@ -5,4 +5,5 @@ urlpatterns = [
     path('slide/', views.slide,name='slide'),
     path('fillBlankAns/', views.fillBlankAns,name='fillBlankAns'),
     path('matchWords/', views.matchWords,name='matchWords'),
+    path('arrangeSentence/', views.arrangeSentence,name='arrangeSentence'),
 ]

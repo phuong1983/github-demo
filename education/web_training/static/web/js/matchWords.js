@@ -7,8 +7,8 @@ const scoreDisplay = document.getElementById('score-value');
 let score = 0;//alert('scoreDisplay : '+score);
 
 vocas.forEach((voca) => {
-    let pictureDiv = createImgCard(voca.image.url,voca.name)
-    let wordDiv = createItemCard(voca.name)
+    let pictureDiv = createImgCard(voca.name,voca.image.url);
+    let wordDiv = createItemCard(voca.name);
 
     container.appendChild(pictureDiv);
     wordDivs.appendChild(wordDiv);    
